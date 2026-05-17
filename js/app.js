@@ -204,12 +204,12 @@ async function generarReporteHTML(paciente) {
         <div class="printable-report">
             <div class="report-header-custom">
                 <div class="report-header-left">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3125/3125713.png" alt="Logo Bio-Track">
+                    <img src="assets/bio-track.png" alt="Logo Bio-Track">
                     <h2>Bio-Track Evolution</h2>
                 </div>
                 <div class="report-header-right">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2997/2997580.png" alt="Icono salud">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png" alt="Icono cuerpo">
+                    <img src="assets/licM.png" alt="Icono salud">
+                    <img src="assets/FE.png" alt="Icono cuerpo">
                 </div>
             </div>
             <div class="report-subheader">

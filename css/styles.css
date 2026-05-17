@@ -1,0 +1,521 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background: #eef2f7;
+    margin: 0;
+    padding: 20px;
+}
+
+.app-container {
+    max-width: 1400px;
+    margin: auto;
+    background: white;
+    border-radius: 28px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    overflow: hidden;
+    padding: 20px 24px;
+}
+
+/* Encabezado con imágenes */
+.header-custom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 15px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-left img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.header-left h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    background: linear-gradient(135deg, #1e3c72, #2b6cb0);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header-right {
+    display: flex;
+    gap: 12px;
+}
+
+.header-right img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: #f0f4f8;
+    padding: 8px;
+}
+
+.tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid #cbd5e0;
+    padding-bottom: 8px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 40px;
+    transition: 0.2s;
+    color: #2d3748;
+}
+
+.tab-btn.active {
+    background: #2b6cb0;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.tab-pane {
+    display: none;
+    animation: fade 0.2s ease;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+@keyframes fade {
+    from { opacity: 0; transform: translateY(5px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 24px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    font-weight: 600;
+    color: #1a202c;
+    font-size: 0.85rem;
+}
+
+input, select {
+    padding: 10px 12px;
+    border: 1px solid #cbd5e0;
+    border-radius: 16px;
+    font-size: 0.9rem;
+    background: white;
+}
+
+button {
+    background: #2c5282;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #1e3a5f;
+    transform: scale(1.02);
+}
+
+.btn-secondary {
+    background: #4a5568;
+}
+
+.btn-secondary:hover {
+    background: #2d3748;
+}
+
+.btn-warning {
+    background: #dd6b20;
+}
+
+.btn-warning:hover {
+    background: #c05621;
+}
+
+.card-result {
+    background: #edf2f7;
+    border-radius: 24px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.flex-charts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.chart-box {
+    background: white;
+    border-radius: 20px;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    text-align: center;
+    width: 220px;
+}
+
+canvas {
+    max-height: 180px;
+    width: 100%;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+    gap: 12px;
+    margin: 15px 0;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 20px;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.patient-list {
+    max-height: 500px;
+    overflow-y: auto;
+    margin-top: 15px;
+}
+
+.patient-item {
+    background: white;
+    border-radius: 20px;
+    padding: 12px 18px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 1px solid #e2e8f0;
+}
+
+.patient-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* MODAL VISUALIZADOR */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s, opacity 0.2s;
+}
+
+.modal-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-container {
+    background: white;
+    width: 90%;
+    max-width: 1200px;
+    height: 90%;
+    max-height: 90vh;
+    border-radius: 28px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+    padding: 16px 24px;
+    background: #1e3c72;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.modal-buttons button {
+    background: white;
+    color: #1e3c72;
+    padding: 6px 16px;
+    font-weight: bold;
+}
+
+.modal-buttons button:hover {
+    background: #e2e8f0;
+    transform: none;
+}
+
+.modal-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background: #f5f7fb;
+}
+
+/* Diseño del reporte a imprimir */
+.printable-report {
+    background: white;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+.report-header-custom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+    border-bottom: 2px solid #2b6cb0;
+    padding-bottom: 15px;
+}
+
+.report-header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.report-header-left img {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+}
+
+.report-header-left h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #1e3c72;
+}
+
+.report-header-right {
+    display: flex;
+    gap: 12px;
+}
+
+.report-header-right img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: #f0f4f8;
+    padding: 6px;
+}
+
+.report-subheader {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4a5568;
+    font-size: 12px;
+}
+
+.three-columns {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.col {
+    flex: 1;
+    min-width: 200px;
+    background: #f9f9ff;
+    padding: 12px;
+    border-radius: 12px;
+    page-break-inside: avoid;
+}
+
+.col h3 {
+    background: #2c5282;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 1rem;
+    margin: 0 0 12px 0;
+    text-align: center;
+}
+
+.medida-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 12px;
+}
+
+.medida-item strong {
+    color: #2d3748;
+}
+
+.datos-paciente {
+    line-height: 1.6;
+}
+
+.datos-paciente p {
+    margin: 6px 0;
+    font-size: 12px;
+}
+
+.composicion-section {
+    margin-top: 20px;
+    background: #f0f4f8;
+    padding: 15px;
+    border-radius: 16px;
+    page-break-inside: avoid;
+}
+
+.composicion-section h3 {
+    background: #1e3c72;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 1rem;
+    margin: 0 0 15px 0;
+    text-align: center;
+}
+
+.composicion-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.composicion-datos {
+    flex: 1;
+    min-width: 200px;
+}
+
+.composicion-datos p {
+    margin: 8px 0;
+    font-size: 13px;
+    background: white;
+    padding: 6px 10px;
+    border-radius: 12px;
+}
+
+.charts-report {
+    flex: 1;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.chart-mini {
+    text-align: center;
+    background: white;
+    border-radius: 16px;
+    padding: 8px;
+    width: 140px;
+}
+
+.chart-mini img {
+    width: 100px;
+    height: 100px;
+}
+
+.chart-mini p {
+    font-size: 11px;
+    margin: 5px 0 0;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 10px;
+    color: #718096;
+    border-top: 1px solid #cbd5e0;
+    padding-top: 10px;
+}
+
+/* Estilos para impresión */
+@media print {
+    .modal-overlay, .modal-header, .modal-buttons, .tabs, .tab-btn, .app-container > :not(.printable-report) {
+        display: none !important;
+    }
+    .modal-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        max-height: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .modal-content {
+        padding: 0;
+        overflow: visible;
+    }
+    .printable-report {
+        padding: 0.8cm;
+    }
+    body {
+        background: white;
+        margin: 0;
+        padding: 0;
+    }
+}

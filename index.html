@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Bio-Track Evolution - Composición Corporal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="app-container">
+    <!-- ENCABEZADO PRINCIPAL CON IMÁGENES -->
+    <div class="header-custom">
+        <div class="header-left">
+            <img src="assets/bio-track.png" alt="Logo Bio-Track">
+            <h1>Bio-Track Evolution</h1>
+        </div>
+        <div class="header-right">
+            <img src="assets/licM.png" alt="Icono salud">
+            <img src="assets/FE.png" alt="Icono cuerpo">
+        </div>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="tab-captura">📝 Capturar / Editar</button>
+        <button class="tab-btn" data-tab="tab-historial">📋 Historial de Pacientes</button>
+    </div>
+
+    <!-- PANEL CAPTURA -->
+    <div id="tab-captura" class="tab-pane active">
+        <form id="pacienteForm">
+            <div class="form-grid">
+                <div class="form-group"><label>🏷️ Nombre Completo</label><input type="text" id="nombre" required></div>
+                <div class="form-group"><label>⚧ Sexo</label><select id="sexo"><option value="hombre">Hombre</option><option value="mujer">Mujer</option></select></div>
+                <div class="form-group"><label>📅 Edad (años)</label><input type="number" id="edad" required></div>
+                <div class="form-group"><label>⚖️ Peso (kg)</label><input type="number" step="0.1" id="peso" required></div>
+                <div class="form-group"><label>📏 Estatura (cm)</label><input type="number" step="0.1" id="estatura" required></div>
+            </div>
+            <h3>📐 Circunferencias (cm)</h3>
+            <div class="form-grid">
+                <div class="form-group"><label>Pecho</label><input type="number" step="0.1" id="pecho"></div>
+                <div class="form-group"><label>Cintura</label><input type="number" step="0.1" id="cintura"></div>
+                <div class="form-group"><label>Abdomen</label><input type="number" step="0.1" id="abdomen"></div>
+                <div class="form-group"><label>Cadera</label><input type="number" step="0.1" id="cadera"></div>
+                <div class="form-group"><label>Brazo</label><input type="number" step="0.1" id="brazo"></div>
+                <div class="form-group"><label>Muslo</label><input type="number" step="0.1" id="muslo"></div>
+                <div class="form-group"><label>Pantorrilla</label><input type="number" step="0.1" id="pantorrilla"></div>
+                <div class="form-group"><label>Muñeca</label><input type="number" step="0.1" id="muneca"></div>
+            </div>
+            <h3>📏 Pliegues cutáneos (mm)</h3>
+            <div class="form-grid">
+                <div class="form-group"><label>Tríceps</label><input type="number" step="0.1" id="triceps"></div>
+                <div class="form-group"><label>Bíceps</label><input type="number" step="0.1" id="biceps"></div>
+                <div class="form-group"><label>Subescapular</label><input type="number" step="0.1" id="subescapular"></div>
+                <div class="form-group"><label>Suprailíaco</label><input type="number" step="0.1" id="suprailiaco"></div>
+                <div class="form-group"><label>Abdominal</label><input type="number" step="0.1" id="abdominalPliegue"></div>
+                <div class="form-group"><label>Muslo (pliegue)</label><input type="number" step="0.1" id="musloPliegue"></div>
+            </div>
+            <div style="display: flex; gap: 12px; margin: 20px 0;">
+                <button type="submit" id="btnGuardar">💾 Guardar Paciente</button>
+                <button type="button" id="btnActualizar" class="btn-secondary" style="display: none;">🔄 Actualizar Paciente</button>
+                <button type="button" id="btnCancelarEdit" class="btn-warning" style="display: none;">❌ Cancelar</button>
+            </div>
+        </form>
+        <div id="resultadosComposicion" class="card-result">
+            <h3>📈 Composición Corporal Calculada</h3>
+            <div id="statsOutput" class="stats-grid"></div>
+            <div class="flex-charts" id="donutContainer">
+                <div class="chart-box"><canvas id="grasaChart" width="200" height="200"></canvas><p>% Grasa Corporal</p></div>
+                <div class="chart-box"><canvas id="musculoChart" width="200" height="200"></canvas><p>% Masa Muscular</p></div>
+                <div class="chart-box"><canvas id="aguaChart" width="200" height="200"></canvas><p>% Agua Corporal</p></div>
+            </div>
+            <div id="grasaVisceralInfo" style="font-style:italic; margin-top: 8px;"></div>
+        </div>
+    </div>
+
+    <!-- PANEL HISTORIAL -->
+    <div id="tab-historial" class="tab-pane">
+        <button id="refreshHistorial" class="btn-secondary">🔄 Recargar lista</button>
+        <div id="listaPacientes" class="patient-list">Cargando pacientes...</div>
+    </div>
+</div>
+
+<!-- MODAL VISUALIZADOR DE REPORTE -->
+<div id="modalReporte" class="modal-overlay">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h3>📋 Reporte Antropométrico</h3>
+            <div class="modal-buttons">
+                <button id="btnImprimirReporte">🖨️ Imprimir</button>
+                <button id="btnEditarPacienteModal">✏️ Editar</button>
+                <button id="btnCerrarModal">❌ Cerrar</button>
+            </div>
+        </div>
+        <div class="modal-content" id="modalContent">
+            <!-- Aquí se inyectará el reporte -->
+        </div>
+    </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
